@@ -2,12 +2,12 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="com.acuant.plugin.AcuantMobileSDK"
-        version="1.2.0">
+        version="2.0">
 
   <name>AcuantMobileSDK</name>
 
   <engines>
-    <engine name="cordova" version=">=3.8.0"/>
+    <engine name="cordova" version=">=6.3.1"/>
   </engines>
 
   <asset src="www/AcuantMobileSDK.js" target="AcuantMobileSDK.js"/>
@@ -41,10 +41,10 @@
 
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <activity
-              android:name="com.acuant.mobilesdk.detect.CameraCardDetectManual">
+              android:name="com.acuant.mobilesdk.detect.Camera2CardDetectManual">
       </activity>
       <activity
-              android:name="com.acuant.mobilesdk.detect.CameraCardDetectAuto">
+          android:name="com.acuant.mobilesdk.detect.CameraCardDetectManual">
       </activity>
       <activity
               android:name="com.acuant.mobilesdk.detect.PDF417.CameraPDF417">
@@ -94,5 +94,15 @@
     <source-file src="src/ios/AcuantMobileSDK.m"/>
  
   </platform>
+
+  <!-- windows -->
+  <platform name="windows">
+	<!-- ARM based CPU-->
+    	<framework src="src/windows/ARM/AcuantWindowsMobileSDKWinRTComponent.winmd" custom="true"/>
+	<framework src="src/windows/ARM/zcard.winmd" custom="true"/>
+	<!-- x64 based CPU-->
+	<!--framework src="src/windows/x64/AcuantWindowsMobileSDKWinRTComponent.winmd" custom="true"/-->
+	<!--framework src="src/windows/x64/zcard.winmd" custom="true"/-->
+   </platform>
 
 </plugin>

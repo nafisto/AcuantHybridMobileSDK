@@ -3,7 +3,7 @@
 Acuant Hybrid SDK API
 ======================
 
-Last updated on – 3/15/2016
+Last updated on – 08/25/2016
 
 # Introduction
 
@@ -48,7 +48,9 @@ Note: The Plugin will not modify the Status bar of the app.
 
 # Requirements
 
--   iOS 8.0 or later is required.
+-	Windows 10
+
+-	iOS 8.0 or later is required.
 
 -   AndroidSDK Version 17 or later.
 
@@ -100,12 +102,60 @@ Example:
 
 # Integration
 
+Note : GitHub has recently changed the versioning for large files. To be able to download large files while cloning from GitHub repositories please make sure git-lfs is installed in the build machine. More information for git-lfs is available at https://git-lfs.github.com/. Please clone/update our SDK repository only after the git-lfs is installed.
+
+
+After cloning the repository execute the following command to make sure all files are pulled.
+
+	git lfs pull
+	
+## Common Error
+
+If git-lfs is not setup, then GitHub doesn't download of large files. Therefore, if the following build error appears while building the iOS app, that means some of the files are missing. 
+
+	ld: warning: ignoring file ../com.acuant.plugin.AcuantMobileSDK/AcuantMobileSDK.framework/AcuantMobileSDK, file was built for unsupported file format ( 0x76 0x65 0x72 0x73 0x69 0x6F 0x6E 0x20 0x68 0x74 0x74 0x70 0x73 0x3A 0x2F 0x2F ) which is not the architecture being linked (armv7): ../com.acuant.plugin.AcuantMobileSDK/AcuantMobileSDK.framework/AcuantMobileSDK
+	Undefined symbols for architecture armv7:
+
+	"_OBJC_CLASS_$_AcuantCardProcessRequestOptions", referenced from:
+
+		objc-class-ref in AcuantMobileSDK.o
+
+	"_OBJC_CLASS_$_AcuantMobileSDKController", referenced from:
+
+		objc-class-ref in AcuantMobileSDK.o
+	ld: symbol(s) not found for architecture armv7
+	clang: error: linker command failed with exit code 1 (use -v to see invocation)
+	
 ## Add AcuantMobileSDK Plugin on each project 
 
-In order to add the plugin to your project, execute the following
-command line:
+In order to add the plugin to your project, follow the below two steps:
 
-> cordova plugin add ../cordova-plugin-AcuantMobileSDK
+Step - 1 : After cloning the Git repository , find the path to cordova-plugin-AcuantMobileSDK 
+
+Step - 2 : Execute the following command
+
+	cordova plugin add < path to cordova-plugin-AcuantMobileSDK>
+
+	For example :
+
+	cordova plugin add Users/user/Desktop/AcuantHybridMobileSDK/cordova-plugin-AcuantHybridSDK`
+
+
+*Note : In Windows please make sure the zcard.dll is present in “<Project folder>\platforms\windows\plugins\com.acuant.plugin.AcuantMobileSDK” in folder.Otherwise copy it from cordova-plugin-AcuantHybridSDK plugin folder.*
+
+Also make sure the following cordova plugins are installed. 
+
+- cordova-plugin-compat
+- cordova-plugin-console
+- cordova-plugin-dialogs
+- cordova-plugin-network-information
+- cordova-plugin-whitelist
+
+
+For Windows platform the following plugin is also required.
+
+- cordova-plugin-camera
+
 
 # Activate the license key
 
@@ -187,12 +237,6 @@ In order to initialize the SDK and show the camera interface in the same step yo
 > AcuantMobileSDK.initAcuantMobileSDKAndShowCardCaptureInterfaceInViewController(successCallback, failure, licenseKey, cardType, region, isBackSide);
 
 Note: if you are going to use any customization method, then you should create a previous instance of the SDK in order to set the camera customization.
-
-### Auto Card capture interface without initialization
-
-In order to call this function, you will need to initialize the SDK first and create an instance of the SDK to call the function (see point 5)
-
-> AcuantMobileSDK.showAutoCameraInterfaceInViewController(successCallback, failure, cardType);
 
 ### Manual Card capture interface without initialization
 
@@ -710,31 +754,7 @@ Mobile Angular UI
 
 # Change Log
 
-If you are updating the Acuant hybrid MobileSDK to the version 1.2,
-please update the show camera methods an callback’s methods.
-
-## New Methods
-
--   AcuantMobileSDK.showAutoCameraInterfaceInViewController(successCallback, failure, cardType);
-
--   AcuantMobileSDK.showManualCameraInterfaceInViewController(successCallback, failure, cardType, region, isBackSide);
-
--   AcuantMobileSDK.showBarcodeCameraInterfaceInViewController(successCallback, failure, cardType, region, isBackSide);
-
--   AcuantMobileSDK.pauseScanningBarcodeCamera(success, failure);
-
--   AcuantMobileSDK.resumeScanningBarcodeCamera(success, failure);
-
-## Changed callbacks methods
-
--   data.id = 'mobileSDKWasValidated';
-
--   data.id == 'didCaptureCropImage'
-
--   data.id == 'didCaptureOriginalImage'
-
--   data.id == 'didCaptureData'
-
--   data.id == 'didFinishProcessingCardWithResult'
-
--   data.id == ‘didFailWithError’
+- Improved cropping in Android platform
+- libpng version updated to resolve security vulnerabilities issue in Android platform 
+- Memory optimization to fix memory out of bound crashes in low memory devices
+- Added DocumentDetectNameShort field for Android platform

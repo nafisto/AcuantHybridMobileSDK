@@ -7,6 +7,12 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.cssn.cssnsamplesdk"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.cssn.cssnsamplesdk"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.cssn.cssnsamplesdk"
         },
